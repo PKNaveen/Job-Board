@@ -4,10 +4,21 @@ import {auth, signIn, signOut} from "@/auth";
 import {db} from "@/database/drizzle";
 import {usersTable} from "@/database/schema";
 import {eq} from "drizzle-orm";
+import {headers} from "next/headers";
+import ratelimit from "@/lib/ratelimit";
+import {redirect} from "next/navigation";
 
 
 export async function signInWithGoogle() {
+    const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+    const response = await ratelimit.limit(ip);
+
+    if (!response.success) {
+        return redirect("/too-fast");
+    }
+
     await signIn("google");
+
 
 }
 
@@ -40,3 +51,5 @@ export async function UpdateDatabase() {
         }
     }
 }
+
+

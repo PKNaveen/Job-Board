@@ -26,8 +26,7 @@ const Sidebar =({data}:{data:any}) => {
 
                 </Link>
 
-                    {/*TODO*/}
-                    {/*set lib utils folder to map logo and  path from usePathname*/}
+
 
                     {sidebarLinks.map(item => {
                         const isActive = pathName === item.route || pathName.startsWith(`${item.route}/`)
@@ -46,8 +45,6 @@ const Sidebar =({data}:{data:any}) => {
 
             </nav>
 
-            {/* TODO    */}
-            {/*    Setup logout here with seperate component*/}
             <Image src={imgUrl} alt={imgUrl} width={24} height={24}/>
             <form action={signOutWithGoogle}>
                 <button>

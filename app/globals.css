@@ -28,6 +28,10 @@
     .sidebar-link {
         @apply flex gap-3 items-center font-semibold py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
     }
+
+    .root-container {
+        @apply flex min-h-screen flex-1 flex-col bg-cover bg-top px-5 xs:px-10 md:px-16;
+    }
 }
 
 

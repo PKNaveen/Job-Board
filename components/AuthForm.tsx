@@ -6,15 +6,21 @@ import {signInWithGoogle, UpdateDatabase} from "@/lib/actions/authActions";
 
 
 
-function stringToHashCode(str: string): string {
+function stringToHashCode(str: string | undefined | null): string {
+    if (!str) {
+        return '0'; // Or any default hash, handling null/undefined
+    }
+
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
-        hash = (hash * 31 + str.charCodeAt(i)) >>> 0; // Prime multiplier 31
+        hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
     }
-    return hash.toString(36); // Convert to alphanumeric base36
+    return hash.toString(36);
 }
 
+
 const AuthForm = ({session,data}: {session: any; data:any}) => {
+
     const router = useRouter();
     const id:string = stringToHashCode(data[0]?.id);
 
@@ -26,7 +32,6 @@ const AuthForm = ({session,data}: {session: any; data:any}) => {
         }
     })
 
-//     now useRouter in a client component
     return (
 
         // TODO
