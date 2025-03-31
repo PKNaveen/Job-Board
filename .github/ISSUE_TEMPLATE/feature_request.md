@@ -1,20 +1,32 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: 🚀 Feature Release
+about: Track the progress of a new feature release
+title: "[Feature]: "
+labels: ["feature-release", "enhancement"]
+assignees: ""
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 🚀 Feature Summary  
+_Briefly describe the new feature being released._
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 🎯 Goals  
+- [ ] What is the primary objective?  
+- [ ] Expected benefits?  
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## ✅ Tasks  
+- [ ] Development complete  
+- [ ] Code review  
+- [ ] Testing & QA  
+- [ ] Documentation update  
+- [ ] Deployment  
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## 📅 Release Timeline  
+- **Start Date:**  
+- **Testing Phase:**  
+- **Expected Release Date:**  
+
+## 📌 Dependencies & Risks  
+_List dependencies or potential risks affecting this release._
+
+## 📢 Announcements & Rollout Plan  
+_Mention if this requires a beta release, internal testing, or a public rollout._
