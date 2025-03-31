@@ -14,9 +14,9 @@ _Briefly describe the new feature being released._
 - [ ] Expected benefits?  
 
 ## ✅ Tasks  
-- [ ] Development complete  
-- [ ] Code review  
-- [ ] Testing & QA  
+- [ ] Under Reveiew
+- [ ] Under Development
+- [ ] Testing
 - [ ] Documentation update  
 - [ ] Deployment  
 
