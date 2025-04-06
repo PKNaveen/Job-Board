@@ -25,6 +25,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.41.0",
+    "esbuild": "^0.25.2",
     "lucide-react": "^0.483.0",
     "next": "^15.2.4",
     "next-auth": "^5.0.0-beta.25",
