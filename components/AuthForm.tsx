@@ -3,7 +3,6 @@ import React, {useEffect} from 'react'
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {signInWithGoogle, UpdateDatabase} from "@/lib/actions/authActions";
-import {stringToHashCode} from "@/lib/actions/crypt";
 
 
 
