@@ -3,26 +3,14 @@ import React, {useEffect} from 'react'
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {signInWithGoogle, UpdateDatabase} from "@/lib/actions/authActions";
+import {stringToHashCode} from "@/lib/actions/crypt";
 
-
-
-function stringToHashCode(str: string | undefined | null): string {
-    if (!str) {
-        return '0'; // Or any default hash, handling null/undefined
-    }
-
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
-    }
-    return hash.toString(36);
-}
 
 
 const AuthForm = ({session,data}: {session: any; data:any}) => {
 
     const router = useRouter();
-    const id:string = stringToHashCode(data[0]?.id);
+    const id:string = data[0]?.id;
 
     useEffect(() => {
         if(session){
