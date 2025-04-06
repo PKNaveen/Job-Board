@@ -9,8 +9,11 @@ import {
 import {Input} from "@/components/ui/input";
 import {insertIntoBoardTable} from "@/lib/actions/insertActions";
 import {toast} from "@/hooks/use-toast";
+import {useRouter} from "next/navigation";
+
 
 const PopUpDialogBox = ({data}:{data:any}) => {
+    const router = useRouter();
 
     const [open, setOpen] = useState(false)
 
@@ -32,6 +35,8 @@ const PopUpDialogBox = ({data}:{data:any}) => {
                 setOpen(false)
 
                 await new Promise(resolve => setTimeout(resolve, 1000))
+
+                router.refresh();
                 toast({
                     title: "Success",
                     description:"Job Board created",
@@ -66,7 +71,7 @@ const PopUpDialogBox = ({data}:{data:any}) => {
                             className=""
                             placeholder="Job Board Name"/>
                 <AlertDialogFooter>
-                    <AlertDialogAction type="submit">Continue</AlertDialogAction>
+                    <AlertDialogAction type="submit" >Continue</AlertDialogAction>
                 </AlertDialogFooter>
                     </form>
             </AlertDialogContent>
