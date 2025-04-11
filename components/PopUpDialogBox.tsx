@@ -1,7 +1,7 @@
 "use client"
 import React, {useActionState, useEffect, useState} from 'react'
 import {
-    AlertDialog, AlertDialogAction,AlertDialogContent,
+    AlertDialog,AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle
@@ -10,12 +10,15 @@ import {Input} from "@/components/ui/input";
 import {insertIntoBoardTable} from "@/lib/actions/insertActions";
 import {toast} from "@/hooks/use-toast";
 import {useRouter} from "next/navigation";
+import {boardNameSchema} from "@/lib/validation";
+import {z} from "zod";
 
 
 const PopUpDialogBox = ({data}:{data:any}) => {
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const router = useRouter();
-
     const [open, setOpen] = useState(false)
+
 
     useEffect(() => {
         // Automatically open the dialog when the component mounts
@@ -28,6 +31,8 @@ const PopUpDialogBox = ({data}:{data:any}) => {
                     user_id:data[0]?.id,
                     name:formData.get("name") as string,
             }
+            // Improved Zod error detection only on name instead of all values such as uuid
+            await boardNameSchema.parseAsync({ name: formValues.name });
 
             const result = await insertIntoBoardTable(formValues.user_id,formValues.name);
             if(result.status=="SUCCESS"){
@@ -45,11 +50,76 @@ const PopUpDialogBox = ({data}:{data:any}) => {
             }
 
         }
+
+        // Check for Zod error
+            /*
+            Expected Error:
+
+            ZodError: [
+              {
+                "code": "too_small",
+                "minimum": 3,
+                "type": "string",
+                "inclusive": true,
+                "exact": false,
+                "message": "String must contain at least 3 character(s)",
+                "path": [
+                  "name"
+                ]
+              }
+            ]
+
+            */
         catch (error) {
-            return { status: "ERROR", error: "Something went wrong" };
+
+            if (error instanceof z.ZodError) {
+                const fieldErrors = error.flatten().fieldErrors;
+
+                /*
+                Flattened error
+                * {name: Array(1)}
+                    name : ['String must contain at least 3 character(s)']
+                */
+                console.log(fieldErrors)
+                const flattenedErrors: Record<string, string> = {};
+
+                // loop through flattened errors and check for first error. In this case its name
+                for (const key in fieldErrors) {
+                    if (fieldErrors[key]?.length) {
+                        // Set the name into new dictionary to call in errors hook in below component
+                        flattenedErrors[key] = fieldErrors[key][0];
+                    }
+                }
+
+                setErrors(flattenedErrors);
+
+                toast({
+                    title: "Error",
+                    description: "Please check your inputs and try again",
+                    variant: "destructive",
+                });
+
+                return { error: "Validation failed", status: "ERROR" };
+            }
+
+            toast({
+                title: "Error",
+                description: "An unexpected error has occurred",
+                variant: "destructive",
+            });
+
+            return {
+                ...prevState,
+                error: "An unexpected error occurred.",
+                status: "ERROR",
+            };
         }
-    }
-    const [state, formAction] = useActionState(handleFormSubmit, {
+        finally {
+
+        }
+    };
+
+    const [state, formAction, isPending] = useActionState(handleFormSubmit, {
         error: "",
         status: "INITIAL",
 
@@ -70,8 +140,11 @@ const PopUpDialogBox = ({data}:{data:any}) => {
                             name="name"
                             className=""
                             placeholder="Job Board Name"/>
+                        {errors.name && <p className="text-red-500 text-sm py-4">{errors.name}</p>}
                 <AlertDialogFooter>
-                    <AlertDialogAction type="submit" >Continue</AlertDialogAction>
+                    <button type="submit" disabled={isPending} className="bg-primary text-black px-4 py-2 rounded-lg">
+                        {isPending? "Submitting..." : "Continue"}
+                    </button>
                 </AlertDialogFooter>
                     </form>
             </AlertDialogContent>
