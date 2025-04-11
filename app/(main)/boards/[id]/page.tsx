@@ -17,7 +17,6 @@ const Page = async ({params}:{params:any}) => {
     */
 
     const board_name = await db.select({name:board.board_name}).from(board).where(eq(board.user_id, id)).limit(1);
-    console.log(board_name)
 
     return (
         <>
