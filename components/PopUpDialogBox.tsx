@@ -74,28 +74,17 @@ const PopUpDialogBox = ({data}:{data:any}) => {
 
             if (error instanceof z.ZodError) {
                 const fieldErrors = error.flatten().fieldErrors;
+                const newErrors: Record<string, string> = {};
 
-                /*
-                Flattened error
-                * {name: Array(1)}
-                    name : ['String must contain at least 3 character(s)']
-                */
-                console.log(fieldErrors)
-                const flattenedErrors: Record<string, string> = {};
-
-                // loop through flattened errors and check for first error. In this case its name
-                for (const key in fieldErrors) {
-                    if (
-                        Object.prototype.hasOwnProperty.call(fieldErrors, key) &&
-                        Array.isArray(fieldErrors[key]) &&
-                        fieldErrors[key].length > 0 &&
-                        !["__proto__", "constructor", "prototype"].includes(key)
-                    ) {
-                        flattenedErrors[key] = fieldErrors[key][0];
-                    }
+                if (fieldErrors.name && Array.isArray(fieldErrors.name) && fieldErrors.name.length > 0) {
+                    newErrors.name = fieldErrors.name[0];
                 }
+                // Add similar checks for other expected keys
+                // if (fieldErrors.email && Array.isArray(fieldErrors.email) && fieldErrors.email.length > 0) {
+                //     newErrors.email = fieldErrors.email[0];
+                // }
 
-                setErrors(flattenedErrors);
+                setErrors(newErrors);
 
                 toast({
                     title: "Error",
