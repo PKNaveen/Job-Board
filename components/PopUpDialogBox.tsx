@@ -85,8 +85,12 @@ const PopUpDialogBox = ({data}:{data:any}) => {
 
                 // loop through flattened errors and check for first error. In this case its name
                 for (const key in fieldErrors) {
-                    if (fieldErrors[key]?.length) {
-                        // Set the name into new dictionary to call in errors hook in below component
+                    if (
+                        Object.prototype.hasOwnProperty.call(fieldErrors, key) &&
+                        Array.isArray(fieldErrors[key]) &&
+                        fieldErrors[key].length > 0 &&
+                        !["__proto__", "constructor", "prototype"].includes(key)
+                    ) {
                         flattenedErrors[key] = fieldErrors[key][0];
                     }
                 }
@@ -114,11 +118,9 @@ const PopUpDialogBox = ({data}:{data:any}) => {
                 status: "ERROR",
             };
         }
-        finally {
-
-        }
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [state, formAction, isPending] = useActionState(handleFormSubmit, {
         error: "",
         status: "INITIAL",
