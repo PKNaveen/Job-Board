@@ -4,29 +4,29 @@ import {board} from "@/database/schema";
 import {eq} from "drizzle-orm";
 import PopUpDialogBox from "@/components/PopUpDialogBox";
 import JobBoard from "@/components/ui/JobBoard";
-import {getUserData} from "@/lib/actions/searchActions";
+import {getBoardId, getUserID} from "@/lib/actions/searchActions";
 
-const Page = async ({params}:{params:any}) => {
-    const id = (await params).id
-    const data = await getUserData(id)
-    const userID = data[0]?.id;
+const Page = async ({params}: {params: Promise<{id: string}>}) => {
+    // console.log(params);
+    const {id} = await params;
+    const userID = await getUserID(id)
 
 
-    const board_data = await db.select({id:board.id}).from(board).where(eq(board.user_id, userID)).limit(1);
-    // console.log(board_data);
+
+    const boardId = await getBoardId(userID)
+    console.log(boardId);
+
     /*
-    Returns an array object of JSON in the following manner
-    [ { name: 'BoardName' } ]  Or [ { name: 'Board Name' } ]
-    Access this into JSX using array call method data[0]?.id
+    board_data returns an board ID as string. No need to destructure further
     */
 
     const board_name = await db.select({name:board.board_name}).from(board).where(eq(board.user_id, id)).limit(1);
 
     return (
         <>
-            {board_data.length === 0 ? <PopUpDialogBox data={data} /> : null}
+            {!boardId ? <PopUpDialogBox userID={userID} /> : null}
             <div className="">{board_name[0]?.name}</div>
-            {board_data.length > 0 ? <JobBoard board_id={board_data} /> : null}
+            {boardId  && <JobBoard board_id={boardId} />}
             {/*<JobBoard board_id={board_data}/>*/}
         </>
     )

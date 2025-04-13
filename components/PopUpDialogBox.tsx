@@ -16,11 +16,11 @@ import {getBoardId} from "@/lib/actions/searchActions";
 import {createDefaultBoardColumns} from "@/lib/actions/defaultBoardActions";
 
 
-const PopUpDialogBox = ({data}:{data:any}) => {
+const PopUpDialogBox = ({userID}:{userID:string}) => {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const router = useRouter();
     const [open, setOpen] = useState(false)
-    const id = data[0]?.id;
+    const id = userID
 
     useEffect(() => {
         // Automatically open the dialog when the component mounts
@@ -30,7 +30,7 @@ const PopUpDialogBox = ({data}:{data:any}) => {
     const handleFormSubmit = async (prevState:any, formData:FormData)=>{
         try {
             const formValues={
-                    user_id:data[0]?.id,
+                    user_id:id as string,
                     name:formData.get("name") as string,
             }
             // Improved Zod error detection only on name instead of all values such as uuid
@@ -40,7 +40,7 @@ const PopUpDialogBox = ({data}:{data:any}) => {
             if(result.status=="SUCCESS"){
                 const board_id = await getBoardId(id);
                 // console.log(board_id);
-                await createDefaultBoardColumns(board_id[0]?.id)
+                await createDefaultBoardColumns(board_id)
                 setOpen(false)
 
                 await new Promise(resolve => setTimeout(resolve, 1000))

@@ -3,7 +3,7 @@ import {db} from "@/database/drizzle";
 import {board_list, master_board_list} from "@/database/schema";
 
 
-export  const createDefaultBoardColumns=async (board_id:any) => {
+export  const createDefaultBoardColumns=async (board_id:string) => {
     console.log("inside function createDefaultBoardColumns:", board_id)
     const master_list = await db.select().from(master_board_list);
     const boardItems = master_list.map((item,index) =>({
