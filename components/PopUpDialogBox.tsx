@@ -30,7 +30,7 @@ const PopUpDialogBox = ({userID}:{userID:string}) => {
     const handleFormSubmit = async (prevState:any, formData:FormData)=>{
         try {
             const formValues={
-                    user_id:id as string,
+                    user_id:id,
                     name:formData.get("name") as string,
             }
             // Improved Zod error detection only on name instead of all values such as uuid
