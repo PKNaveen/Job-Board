@@ -27,7 +27,7 @@ export const board = pgTable('board', {
 // board and board_list relation one to many
 export const board_list = pgTable('board_list', {
     id: uuid("id").primaryKey().notNull().defaultRandom().unique(),
-    board_id: uuid("board_id").notNull().references(()=> board.id),
+    board_id: uuid("board_id").notNull().references(()=> board.id,{onDelete:"cascade"}),
     list_name: varchar("list_name",{length:25}).notNull(),
     position: integer().notNull().unique()
 })
@@ -51,4 +51,7 @@ export const card_data = pgTable('card_data', {
     stage:stageEnum().default("Wishlist").notNull(),
 })
 
-
+export const master_board_list = pgTable('master_board_list', {
+    id:uuid("id").primaryKey().defaultRandom().unique(),
+    column_name:varchar("column_name",{length:255}).notNull(),
+})

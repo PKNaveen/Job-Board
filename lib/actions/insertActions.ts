@@ -3,7 +3,7 @@ import {db} from "@/database/drizzle";
 import {board} from "@/database/schema";
 import {eq} from "drizzle-orm";
 
-export const insertIntoBoardTable = async (id:any, name:string)=>{
+export const insertIntoBoardTable = async (id:string, name:string)=>{
     const existingBoard = await db
         .select()
         .from(board)
@@ -19,7 +19,7 @@ export const insertIntoBoardTable = async (id:any, name:string)=>{
         }
 
         catch (error) {
-            console.log(error, "Sign In Error");
+            return {status:"FAILED", error: error};
         }
     }
     return {status:"SUCCESS"}
