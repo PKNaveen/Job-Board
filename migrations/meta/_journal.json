@@ -29,6 +29,41 @@
       "when": 1743748223219,
       "tag": "0003_loving_falcon",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1744436775000,
+      "tag": "0004_great_scarlet_witch",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1744437069673,
+      "tag": "0005_wet_genesis",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1744437365164,
+      "tag": "0006_lame_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1744437791166,
+      "tag": "0007_parched_roland_deschain",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1744441886306,
+      "tag": "0008_bored_lilith",
+      "breakpoints": true
     }
   ]
 }

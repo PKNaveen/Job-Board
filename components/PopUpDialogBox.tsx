@@ -12,13 +12,15 @@ import {toast} from "@/hooks/use-toast";
 import {useRouter} from "next/navigation";
 import {boardNameSchema} from "@/lib/validation";
 import {z} from "zod";
+import {getBoardId} from "@/lib/actions/searchActions";
+import {createDefaultBoardColumns} from "@/lib/actions/defaultBoardActions";
 
 
 const PopUpDialogBox = ({data}:{data:any}) => {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const router = useRouter();
     const [open, setOpen] = useState(false)
-
+    const id = data[0]?.id;
 
     useEffect(() => {
         // Automatically open the dialog when the component mounts
@@ -36,7 +38,9 @@ const PopUpDialogBox = ({data}:{data:any}) => {
 
             const result = await insertIntoBoardTable(formValues.user_id,formValues.name);
             if(result.status=="SUCCESS"){
-
+                const board_id = await getBoardId(id);
+                // console.log(board_id);
+                await createDefaultBoardColumns(board_id[0]?.id)
                 setOpen(false)
 
                 await new Promise(resolve => setTimeout(resolve, 1000))

@@ -19,7 +19,7 @@ export const insertIntoBoardTable = async (id:any, name:string)=>{
         }
 
         catch (error) {
-            console.log(error, "Sign In Error");
+            return {status:"FAILED", error: error};
         }
     }
     return {status:"SUCCESS"}
