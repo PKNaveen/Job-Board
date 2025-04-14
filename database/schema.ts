@@ -29,7 +29,7 @@ export const board_list = pgTable('board_list', {
     id: uuid("id").primaryKey().notNull().defaultRandom().unique(),
     board_id: uuid("board_id").notNull().references(()=> board.id,{onDelete:"cascade"}),
     list_name: varchar("list_name",{length:25}).notNull(),
-    position: integer().notNull().unique()
+    position: integer().notNull()
 })
 
 // board_list and card relation: one to many

@@ -1,7 +1,8 @@
 "use server"
 import {db} from "@/database/drizzle";
-import {board} from "@/database/schema";
+import {board, board_list} from "@/database/schema";
 import {eq} from "drizzle-orm";
+import {getBoardListPosition} from "@/lib/actions/searchActions";
 
 export const insertIntoBoardTable = async (id:string, name:string)=>{
     const existingBoard = await db
@@ -23,4 +24,20 @@ export const insertIntoBoardTable = async (id:string, name:string)=>{
         }
     }
     return {status:"SUCCESS"}
+}
+
+export const insertIntoBoardListTable = async (id:string)=>{
+    const count = await getBoardListPosition(id);
+    const name ="List Name";
+    try{
+        await db.insert(board_list).values({
+            board_id:id,
+            list_name:name,
+            position:count[0]?.count,
+        })
+        return {status:"SUCCESS"}
+    }
+    catch (e) {
+        return {status:"FAILED", error: e};
+    }
 }

@@ -9,7 +9,12 @@
    .auth-container{
        @apply flex flex-col-reverse sm:flex-row ;
    }
-
+    .card-grid{
+        @apply grid md:grid-cols-3 sm:grid-cols-2 gap-8;
+    }
+    .section_container {
+        @apply px-10 py-6 max-w-7xl mx-auto;
+    }
     .auth-form{
         @apply my-auto flex h-full min-h-screen flex-1 items-center bg-cover bg-top px-10 py-10
     }
@@ -19,7 +24,7 @@
     }
 
     .sidebar {
-        @apply sticky left-0 top-0 flex h-screen w-fit flex-col justify-between xl:p-6 bg-[#3B3B3F]
+        @apply sticky h-screen w-64 bg-gray-600 p-4 flex flex-col justify-between left-0 top-0
     }
     .sidebar-logo-text {
         @apply uppercase text-[26px] font-bold  max-xl:hidden;
