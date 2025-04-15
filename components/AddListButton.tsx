@@ -25,7 +25,11 @@ const AddListButton = ({board_id}:{board_id:string}) => {
     }
     return (
         <>
-            <button onClick={handleClick} key="submit">
+            <button onClick={()=>{
+                void (async ()=>{
+                    await handleClick();
+                })();
+            }} key="submit">
                 <h3 className="uppercase i">ADD here</h3>
             </button>
         </>
