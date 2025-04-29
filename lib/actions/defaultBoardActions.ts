@@ -9,7 +9,7 @@ export  const createDefaultBoardColumns=async (board_id:string) => {
     const boardItems = master_list.map((item,index) =>({
         board_id:board_id,
         list_name:item.column_name,
-        position:index
+        position:index+1
     }))
 
     try{

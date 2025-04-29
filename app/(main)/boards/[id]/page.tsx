@@ -5,7 +5,6 @@ import {getBoardId, getUserID} from "@/lib/actions/searchActions";
 
 
 const Page = async ({params}: {params: Promise<{id: string}>}) => {
-    // console.log(params);
     const {id} = await params;
     const userID = await getUserID(id)
     const boardId = await getBoardId(userID)
@@ -17,7 +16,7 @@ const Page = async ({params}: {params: Promise<{id: string}>}) => {
 
     return (
         <>
-            {boardId  && <JobBoard board_id={boardId} />}
+            {boardId  && <JobBoard board_id={boardId}  />}
 
             {!boardId ? <PopUpDialogBox userID={userID} /> : null}
 

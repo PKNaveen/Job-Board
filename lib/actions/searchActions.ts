@@ -1,7 +1,7 @@
 "use server"
 import {db} from "@/database/drizzle";
 import {board, board_list, usersTable} from "@/database/schema";
-import {count, eq} from "drizzle-orm";
+import {eq, max, sql} from "drizzle-orm";
 
 
 
@@ -21,12 +21,12 @@ export const getBoardId = async (userId:string)=>{
 }
 
 export const getBoardColumnNames = async (id:string)=>{
-   const result = await db.select().from(board_list).where(eq(board_list.board_id,id))
+   const result = await db.select().from(board_list).orderBy(sql`${board_list.position}`).where(eq(board_list.board_id,id))
    return result
 }
 
 export const getBoardListPosition = async (board_id:string) => {
-   const result = await db.select({count:count()}).from(board_list).where(eq(board_list.board_id,board_id));
+   const result = await db.select({position_id:max(board_list.position)}).from(board_list).where(eq(board_list.board_id,board_id));
    return result;
 }
 

@@ -27,17 +27,26 @@ export const insertIntoBoardTable = async (id:string, name:string)=>{
 }
 
 export const insertIntoBoardListTable = async (id:string)=>{
+
+
     const count = await getBoardListPosition(id);
+    const position_id = count[0]?.position_id || 0
+    console.log(count)
+    console.log("Position", count[0]?.position_id)
+    console.log("Next position_id:", position_id);
+
     const name ="List Name";
     try{
         await db.insert(board_list).values({
             board_id:id,
             list_name:name,
-            position:count[0]?.count,
+            // Change position here
+            position: position_id+1
         })
         return {status:"SUCCESS"}
     }
     catch (e) {
         return {status:"FAILED", error: e};
     }
+
 }
