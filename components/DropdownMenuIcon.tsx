@@ -11,8 +11,10 @@ import {
 import {Ellipsis, Pencil} from "lucide-react";
 import DeleteListButton from "@/components/DeleteListButton";
 import {MoveListButton} from "@/components/MoveListButton";
+import {BoardItem, data} from "@/lib/props";
 
-const DropdownMenuIcon = ({data,item,board_id}:{data:any,item:any,board_id:string}) => {
+
+const DropdownMenuIcon = ({data,item,board_id}:{data:data[],item:BoardItem,board_id:string}) => {
     // Check delete list button
     // console.log(data.map(item => item.id));
     return (

@@ -18,10 +18,11 @@ import {
 } from "@/components/ui/select"
 import {updatePosition} from "@/lib/actions/updateActions";
 import {useRouter} from "next/navigation";
+import {BoardItem, data} from "@/lib/props";
 
 
 
-export const MoveListButton = ({board_data,current_item,board_id}:{board_data:any,current_item:any,board_id:string}) => {
+export const MoveListButton = ({board_data,current_item,board_id}:{board_data:data[],current_item:BoardItem,board_id:string}) => {
     const [open,setOpen] = useState(false);
     const [value, setValue] = useState(``);
     const router = useRouter();
@@ -43,7 +44,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:an
         <>
             <button
                 className="flex-between uppercase w-full gap-2 hover:bg-dark-400"
-                onClick={() => setOpen(true)}
+                onClick={() => {setOpen(true);}}
             >
                 Move List
                 <ArrowRightLeft/>
@@ -52,7 +53,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:an
             {/*Instead of nesting inside button we use useState to call if condition is true then only mount the value. Else this popup is never mounted*/}
             {open &&(
 
-                <AlertDialog open={open} onOpenChange={(open) => setOpen(open)}>
+                <AlertDialog open={open} onOpenChange={(open) => {setOpen(open);}}>
                     <AlertDialogContent className="">
                         <AlertDialogHeader>
                             <AlertDialogTitle>Move List</AlertDialogTitle>
@@ -66,7 +67,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:an
                                 <SelectValue placeholder={`${current_item.position} - ${current_item.list_name} (Current)`} />
                             </SelectTrigger>
                             <SelectContent >
-                            {board_data.map((i:any,index:number) => (
+                            {board_data.map((i: BoardItem,index:number) => (
                                         <SelectItem
                                             key={index}
                                             value={`${i.position}`}
@@ -83,7 +84,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:an
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                             <button
                                 className="px-4 py-2 rounded-lg outline-solid hover:bg-dark-400"
-                                onClick={handleMoveList}
+                                onClick={() => {void handleMoveList();}}
                             >
                                 Move List
                             </button>

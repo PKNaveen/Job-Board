@@ -10,7 +10,7 @@ const AddListButton = ({board_id}:{board_id:string}) => {
     const handleClick = async () => {
         try {
            const insert =  await insertIntoBoardListTable(board_id);
-           if(insert!.status === "SUCCESS"){
+           if(insert?.status === "SUCCESS"){
                router.refresh()
                toast({
                    title: "Success",

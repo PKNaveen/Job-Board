@@ -36,7 +36,7 @@ const DeleteListButton = ({board_list_id,position,board_id}:{board_list_id:strin
         <>
             <button
                 className="flex-between uppercase w-full px-2 py-1 hover:bg-dark-400"
-                onClick={() => setOpen(true)}
+                onClick={() => {setOpen(true);}}
             >
                 delete
                 <Trash2/>
@@ -57,7 +57,7 @@ const DeleteListButton = ({board_list_id,position,board_id}:{board_list_id:strin
                         <AlertDialogFooter>
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                             <button
-                                onClick={handleDelete}
+                                onClick={()=>{void handleDelete();}}
                                 className="px-4 py-2 rounded-lg outline-solid hover:bg-dark-400"
                             >
                                 Delete

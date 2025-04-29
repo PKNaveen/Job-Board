@@ -12,7 +12,7 @@ import {sql} from "drizzle-orm";
 // First it opens a case check for both positions
 // First case: When user wants to swap positions between 2 and 4 , we have to find whether and update position: 2 with position: 4
 // Second case: Once the list that needs to be updated is set, the old position 4 must be updated to this list as 4
-export const updatePosition= async (position_id1:string, position_id2:string,board_id:string)=>{
+export const updatePosition= async (position_id1:number, position_id2:string,board_id:string)=>{
     // const current_position = await getBoardListPosition(board_id)
     await db.update(board_list).set({
         position: sql`

@@ -11,7 +11,7 @@ import DropdownMenuIcon from "@/components/DropdownMenuIcon";
 const JobBoard = async ({board_id}: { board_id: string }) => {
     const data = await getBoardColumnNames(board_id)
 
-    // console.log(data)
+    console.log(data)
 
 
 
