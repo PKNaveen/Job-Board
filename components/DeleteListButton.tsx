@@ -11,12 +11,11 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import {deleteBoardList} from "@/lib/actions/deleteActions";
-import {useRouter} from "next/navigation";
 
 
-const DeleteListButton = ({board_list_id,position,board_id}:{board_list_id:string,position:number,board_id:string}) => {
+
+const DeleteListButton = ({board_list_id,position,board_id,onSuccess}:{board_list_id:string,position:number,board_id:string,onSuccess:any}) => {
     const [open, setOpen] = useState(false)
-    const router = useRouter();
 
     // Use Effect is only needed when component is mounted
     // i.e. You want to show alert box when you click the three dots
@@ -26,7 +25,7 @@ const DeleteListButton = ({board_list_id,position,board_id}:{board_list_id:strin
         try {
             await deleteBoardList(board_list_id,position,board_id);
             setOpen(false)
-            router.refresh();
+            onSuccess?.()
         }
         catch (error){
             return {status:"FAILED", error:error}
@@ -35,7 +34,7 @@ const DeleteListButton = ({board_list_id,position,board_id}:{board_list_id:strin
     return (
         <>
             <button
-                className="flex-between uppercase w-full px-2 py-1 hover:bg-dark-400"
+                className="flex-between uppercase w-full px-2 py-2 hover:bg-dark-400 border border-solid border-dark-275 text-text-header"
                 onClick={() => {setOpen(true);}}
             >
                 delete

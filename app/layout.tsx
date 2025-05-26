@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import {ThemeProvider} from "@/components/ui/theme-provider";
+import {Inter} from 'next/font/google'
+import {Toaster} from "sonner";
 
+const inter = Inter({
+    subsets:['latin']
+})
 const workSans = localFont({
     src: [
         {
@@ -63,14 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={workSans.variable}
-      >
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
+        className={inter.className}
       >
         {children}
-      </ThemeProvider>
+      <Toaster richColors={true} theme={"dark"} toastOptions={{}} />
       </body>
     </html>
   );

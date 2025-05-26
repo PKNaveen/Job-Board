@@ -8,8 +8,8 @@ const Layout = ({children}: { children: ReactNode }) => {
             <section className="auth-form">
                 <div className="auth-box ">
                     <div className="flex flex-row gap-3">
-                        <Image src="/vercel.svg" alt="icons" width={24} height={24}/>
-                        <h1 className="text-2xl font-semibold text-white">Job Board</h1>
+                        <Image src="/logo.svg" alt="icons" width={48} height={48}/>
+                        <h1 className="text-3xl font-bold text-text-header">Seeker</h1>
                     </div>
                     <div>{children}</div>
                 </div>

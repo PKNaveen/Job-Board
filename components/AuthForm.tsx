@@ -25,10 +25,10 @@ const AuthForm = ({session,data}: {session: any; data:any}) => {
         // Change authform to add linkedin and google
         <div className="flex-row gap-2">
             <div className="flex">
-                <div className="flex bg-[#414249] w-full py-2 rounded-xl ">
+                <div className="flex bg-dark-400 w-full py-2 rounded-xl ">
                     <form action={signInWithGoogle}>
-                        <button className="flex gap-3 px-28 w-full">
-                            <Image src="/vercel.svg" alt="test" width={16} height={16}/>
+                        <button className="flex gap-3 px-28 w-full text-text-main">
+                            <Image src="/vercel.svg" alt="test" width={16} height={16} className=""/>
                             Continue with Google
                         </button>
                     </form>

@@ -17,15 +17,13 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import {updatePosition} from "@/lib/actions/updateActions";
-import {useRouter} from "next/navigation";
 import {BoardItem, data} from "@/lib/props";
 
 
 
-export const MoveListButton = ({board_data,current_item,board_id}:{board_data:data[],current_item:BoardItem,board_id:string}) => {
+export const MoveListButton = ({board_data,current_item,board_id,onSuccess}:{board_data:data[],current_item:BoardItem,board_id:string,onSuccess:any}) => {
     const [open,setOpen] = useState(false);
     const [value, setValue] = useState(``);
-    const router = useRouter();
    // console.log(board_id);
 
     const handleMoveList = async ()=>{
@@ -33,7 +31,9 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:da
             await updatePosition(current_item.position,value,board_id)
             // console.log(value,current_item.position)
             setOpen(false)
-            router.refresh();
+
+
+            location.reload()
         }
         catch (error){
             return {status: "FAILED", error:error}
@@ -43,8 +43,10 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:da
     return (
         <>
             <button
-                className="flex-between uppercase w-full gap-2 hover:bg-dark-400"
-                onClick={() => {setOpen(true);}}
+                className="flex-between uppercase w-full gap-2 hover:bg-dark-400  border border-solid border-dark-275 py-2 text-text-header"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen(true);}}
             >
                 Move List
                 <ArrowRightLeft/>
@@ -54,7 +56,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:da
             {open &&(
 
                 <AlertDialog open={open} onOpenChange={(open) => {setOpen(open);}}>
-                    <AlertDialogContent className="">
+                    <AlertDialogContent className="text-white">
                         <AlertDialogHeader>
                             <AlertDialogTitle>Move List</AlertDialogTitle>
                             <AlertDialogDescription>
@@ -66,7 +68,7 @@ export const MoveListButton = ({board_data,current_item,board_id}:{board_data:da
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder={`${current_item.position} - ${current_item.list_name} (Current)`} />
                             </SelectTrigger>
-                            <SelectContent >
+                            <SelectContent className="text-white" >
                             {board_data.map((i: BoardItem,index:number) => (
                                         <SelectItem
                                             key={index}
