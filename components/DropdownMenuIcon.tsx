@@ -14,24 +14,24 @@ import {MoveListButton} from "@/components/MoveListButton";
 import {BoardItem, data} from "@/lib/props";
 
 
-const DropdownMenuIcon = ({data,item,board_id}:{data:data[],item:BoardItem,board_id:string}) => {
+const DropdownMenuIcon = ({data,item,board_id,onSuccess}:{data:data[],item:BoardItem,board_id:string,onSuccess:any}) => {
     // Check delete list button
     // console.log(data.map(item => item.id));
     return (
         <>
         <DropdownMenu>
-            <DropdownMenuTrigger><Ellipsis /></DropdownMenuTrigger>
-            <DropdownMenuContent className="">
-                <DropdownMenuItem className="uppercase flex-between">Rename
+            <DropdownMenuTrigger><Ellipsis color="#ffff"/></DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-dark-300 shadow-md border-dark-275 text-text-header">
+                <DropdownMenuItem className="uppercase flex-between ">Rename
                     <Pencil className="size-5"/>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem  asChild>
-                    <DeleteListButton board_list_id={item.id} position={item.position} board_id={board_id} />
+                    <DeleteListButton board_list_id={item.id} position={item.position} board_id={board_id} onSuccess={onSuccess} />
                 </DropdownMenuItem>
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem asChild>
-                    <MoveListButton board_data={data} current_item={item} board_id={board_id}/>
+                    <MoveListButton board_data={data} current_item={item} board_id={board_id} onSuccess={onSuccess}/>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -5,7 +5,8 @@ const Config = {
         upstash:{
             redisUrl: process.env.UPSTASH_REDIS_REST_URL!,
             redisToken: process.env.UPSTASH_REDIS_REST_TOKEN!,
-        }
+        },
+        logo:process.env.LOGO_TOKEN!,
     }
 }
 

@@ -7,7 +7,6 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./sanity/**/*.{js,ts,jsx,tsx,mdx}",
     ],
 
   theme:{
@@ -15,69 +14,71 @@ const config: Config = {
   		screens: {
   			xs: '475px'
   		},
+		backgroundImage:{
+			"primary-gradient": "linear-gradient(\n" +
+				"  to bottom,\n" +
+				"  #4A90E2,\n" +
+				"  #ecf5fc  48%,\n" +
+				"  #4A90E2 68%,\n" +
+				"  #2C6693 100%\n" +
+				");",
+			frost: "repeating-linear-gradient(to right, rgba(255,255,255,.04) 0%, rgba(0,0,0,.39) 49%, rgba(255,255,255,.27) 100%)"
+		},
   		colors: {
-  			primary: {
-  				'100': '#00B8FF',
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			dark: {
-  				'200': '#0D0F10',
-  				'300': '#131619',
-  				'400': '#1A1D21',
-  				'500': '#363A3D',
-  				'600': '#76828D',
-  				'700': '#ABB8C4'
-  			},
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
+				primary:{
+					"100":"#000000",
+					DEFAULT:"#000000"
+				},
+				dark:{
+					"100":"#000000",
+					"200":"#131313",
+					"250":"#18181C",
+					"275":"#1e1f24",
+					"300":"#313030",
+					"400":"#6E6E6E",
+					"500":"#D2D3E0",
+					"test":"#1a1b1d",
+					"dialog":"#151621",
+					"button-400":"#858699",
+					"button-600":"#5C67C7",
+					DEFAULT: "#000000",
+
+				},
+				light:{
+					"100":"#f0f0f0",
+				},
+				text:{
+					"main":"#EEEFFC",
+					"main-sub":"#E0E1EC",
+					"test":"#4A90E2",
+					"header":"#DFDFDF",
+					"sub-header":"#D0D0D0",
+					"date":"#6E6E6E",
+					DEFAULT: "#FFFFFF",
+				},
+				icon:{
+					"100":"#C8C8C8",
+					DEFAULT:"#C8C8C8"
+				},
+
   		},
   		fontFamily: {
   			sans: [
   				'var(--font-sans)',
                     ...fontFamily.sans
-                ]
+                ],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+  		},
+		boxShadow: {
+			100: "2px 2px 0px 0px rgb(0, 0, 0)",
+			200: "2px 2px 0px 2px rgb(0, 0, 0)",
+			300: "2px 2px 0px 2px rgb(238, 43, 105)",
+		},
+  	},
   },
     plugins: [require("tailwindcss-animate")]
 }

@@ -1,8 +1,8 @@
 "use server"
 
 import {db} from "@/database/drizzle";
-import {board_list} from "@/database/schema";
-import {sql} from "drizzle-orm";
+import {board_list, card} from "@/database/schema";
+import {eq, sql} from "drizzle-orm";
 
 
 // Swap position using switch case in SQl
@@ -26,3 +26,28 @@ export const updatePosition= async (position_id1:number, position_id2:string,boa
         .where(sql`${board_list.board_id} = ${board_id} and ${board_list.position} in (${position_id1}, ${position_id2})`);
     return {status:"SUCCESS"}
 }
+
+export const updateJobCard = async (company:string, title:string, post_url:string, salary:string, location:string, description:string, card_id:string)=>{
+
+    await db.update(card).set({
+        title:company,
+        description:title,
+        post_url:post_url,
+        location:location,
+        salary:salary
+    }).where(eq(card.id,card_id));
+
+    return {status:"SUCCESS"}
+}
+
+export const updateCardPosition = async (cards: { card_id: string; position: number; listId: string }[]) => {
+
+    // Cards is an array of all cards to update
+    await Promise.all(cards.map(c =>
+        db.update(card).set({
+            position: c.position,
+            list_id: c.listId
+        })
+            .where(eq(card.id, c.card_id))
+    ));
+};

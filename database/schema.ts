@@ -38,20 +38,29 @@ export const card = pgTable('card', {
     list_id: uuid("list_id").notNull().references(()=> board_list.id,{onDelete:"cascade"}),
     title: varchar("card_name",{length:255}).notNull(),
     description: text("description").notNull(),
-    created_at: timestamp("created_At",{
+    position:integer().notNull(),
+    post_url: text("post_url").notNull(),
+    location: text("location").notNull(),
+    salary: text("salary").notNull(),
+    stage:stageEnum().default("Wishlist").notNull(),
+    created_at: timestamp("created_at",{
         withTimezone: true,
     }).defaultNow(),
 })
 
-export const card_data = pgTable('card_data', {
-    card_id:uuid("card_id").primaryKey().unique().references(()=> card.id,{onDelete:"cascade"}),
-    post_url: varchar("post_url",{length:255}),
-    location_url: varchar("location_url",{length:255}),
-    salary: varchar("salary",{length:255}),
-    stage:stageEnum().default("Wishlist").notNull(),
-})
 
 export const master_board_list = pgTable('master_board_list', {
     id:uuid("id").primaryKey().defaultRandom().unique(),
     column_name:varchar("column_name",{length:255}).notNull(),
+})
+
+export const all_contacts = pgTable('all_contacts', {
+    id:uuid("id").primaryKey().defaultRandom().unique(),
+    board_id: uuid("list_id").notNull().references(()=> board_list.id,{onDelete:"cascade"}),
+    name: varchar("name").notNull(),
+    email: varchar("email"),
+    phone: varchar("phone"),
+    linkedin: varchar("linkedin"),
+    twitter:varchar("twitter"),
+
 })
