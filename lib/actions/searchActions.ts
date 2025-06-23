@@ -2,7 +2,7 @@
 import {db} from "@/database/drizzle";
 import {board, board_list, card, usersTable} from "@/database/schema";
 import {eq, max, sql} from "drizzle-orm";
-import {list} from "postcss";
+import {Contact} from "@/lib/props";
 
 type card ={
 
@@ -83,4 +83,15 @@ export const getAllApplications =  async (id:string)=>{
 `;
     const result = await db.execute(total);
     return result.rows
+}
+
+export const getAllContacts = async (id:string)=>{
+    const query = sql`
+    SELECT all_contacts.*
+    FROM all_contacts
+    JOIN board ON all_contacts.board_id = board.id
+    WHERE board.user_id = ${id};
+`;
+    const result = await db.execute(query)
+    return result.rows as Contact[]
 }
