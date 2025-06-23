@@ -9,12 +9,32 @@ import {z} from "zod";
 import {useRouter} from "next/navigation";
 import {updateJobCard} from "@/lib/actions/updateActions";
 import {toast} from "sonner";
+import {deleteJobCard} from "@/lib/actions/deleteActions";
 
 export const EditJobCard = ({column}:{column:any}) => {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const router = useRouter();
+    console.log(column.id)
 
-    const handleFormSubmit = async (prevState:any, formData:FormData)=>{
+    const handleDeleteJobCard = async ()=>{
+        try {
+            const del = await deleteJobCard(column.id);
+            if (del?.status === "SUCCESS"){
+                toast.success('Success', {
+                    description: 'Job Application delete successfully',
+                })
+
+
+                router.refresh()
+            }
+        }
+        catch (e) {
+            toast.error('Error',{
+                description:"An unexpected error has occurred",
+            })
+        }
+    }
+   const handleFormSubmit = async (prevState:any, formData:FormData)=>{
         try {
             const formValues={
                 company:formData.get("company") as string,
@@ -130,7 +150,7 @@ export const EditJobCard = ({column}:{column:any}) => {
 
     });
     return (
-
+        <>
         <form action={formAction}>
             <div className="flex flex-row flex-wrap w-full mb-5 gap-4 px-2">
 
@@ -236,5 +256,11 @@ export const EditJobCard = ({column}:{column:any}) => {
             </div>
 
         </form>
+            <div className="px-2 py-2">
+                <button onClick={handleDeleteJobCard} className="bg-dark-300 text-white hover:bg-dark-400 font-semibolds px-10 rounded-md py-1">
+                    Delete
+                </button>
+            </div>
+        </>
     )
 }

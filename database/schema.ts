@@ -56,8 +56,10 @@ export const master_board_list = pgTable('master_board_list', {
 
 export const all_contacts = pgTable('all_contacts', {
     id:uuid("id").primaryKey().defaultRandom().unique(),
-    board_id: uuid("list_id").notNull().references(()=> board_list.id,{onDelete:"cascade"}),
+    board_id: uuid("board_id").notNull().references(()=> board.id,{onDelete:"cascade"}),
     name: varchar("name").notNull(),
+    company:varchar("company").notNull(),
+    title:varchar("title").notNull(),
     email: varchar("email"),
     phone: varchar("phone"),
     linkedin: varchar("linkedin"),
