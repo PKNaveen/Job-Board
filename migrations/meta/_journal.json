@@ -120,6 +120,27 @@
       "when": 1748247261070,
       "tag": "0016_calm_spencer_smythe",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1748757775192,
+      "tag": "0017_free_silver_samurai",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1748761645860,
+      "tag": "0018_special_chronomancer",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1748763062250,
+      "tag": "0019_curly_vampiro",
+      "breakpoints": true
     }
   ]
 }

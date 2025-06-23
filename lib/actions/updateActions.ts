@@ -1,7 +1,7 @@
 "use server"
 
 import {db} from "@/database/drizzle";
-import {board_list, card} from "@/database/schema";
+import {all_contacts, board_list, card} from "@/database/schema";
 import {eq, sql} from "drizzle-orm";
 
 
@@ -51,3 +51,27 @@ export const updateCardPosition = async (cards: { card_id: string; position: num
             .where(eq(card.id, c.card_id))
     ));
 };
+
+export const updateAllContacts = async (contacts_card_id:string,Name:string,Company:string,Title:string,Email:string,Phone:string,LinkedIn:string,Twitter:string) => {
+    console.log("This is contacts_card_id inside Drizzle ORM",contacts_card_id)
+    await db.update(all_contacts).set({
+        name:Name,
+        company:Company,
+        title:Title,
+        email:Email,
+        phone:Phone,
+        linkedin:LinkedIn,
+        twitter:Twitter,
+    })
+        .where(eq(all_contacts.id,contacts_card_id))
+    return {status:"SUCCESS"}
+}
+
+export const updateListName = async (list_id:string,name:string) =>{
+    await db.update(board_list).set({
+        list_name: name,
+    })
+        .where(eq(board_list.id,list_id))
+
+    return {status:"SUCCESS"}
+}

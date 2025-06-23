@@ -11,6 +11,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import {deleteBoardList} from "@/lib/actions/deleteActions";
+import {Input} from "@/components/ui/input";
 
 
 
@@ -45,7 +46,7 @@ const DeleteListButton = ({board_list_id,position,board_id,onSuccess}:{board_lis
             {open &&(
 
                 <AlertDialog open={open} onOpenChange={setOpen}>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="bg-dark-button-400">
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
