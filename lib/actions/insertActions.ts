@@ -2,7 +2,7 @@
 import {db} from "@/database/drizzle";
 import {all_contacts, board, board_list, card} from "@/database/schema";
 import {eq} from "drizzle-orm";
-import {getBoardId, getBoardListPosition, getMaxCardPositionId} from "@/lib/actions/searchActions";
+import {getBoardListPosition, getMaxCardPositionId} from "@/lib/actions/searchActions";
 
 export const insertIntoBoardTable = async (id:string, name:string)=>{
     const existingBoard = await db
@@ -72,26 +72,4 @@ export const insertIntoCardTable = async (list_id:string,company:string,title:st
     }
 }
 
-export const insetIntoAllContactsTable  = async (id:string,Name:string,Company:string,Title:string,Email:string,Phone:string,LinkedIn:string,Twitter:string)=> {
-    const boardId=await getBoardId(id);
-
-
-    try{
-        console.log(boardId)
-        await db.insert(all_contacts).values({
-            board_id:boardId,
-            name:Name,
-            company:Company,
-            title:Title,
-            email:Email,
-            phone:Phone,
-            linkedin:LinkedIn,
-            twitter:Twitter,
-        })
-        return {status:"SUCCESS"}
-    }
-    catch (e) {
-        return {status:"FAILED", error: e};
-    }
-}
 

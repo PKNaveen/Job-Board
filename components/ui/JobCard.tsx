@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Pencil,GripHorizontal } from "lucide-react";
 import { EditJobCard } from "@/components/EditJobCard";
-import {Skeleton} from "@/components/ui/skeleton";
 
 export const JobCard = ({
                             column,
@@ -20,13 +19,6 @@ export const JobCard = ({
     dragHandleProps?: React.HTMLAttributes<HTMLDivElement> | null;
 }) => {
     const [viewMode, setViewMode] = useState<"edit" | "contacts">("edit");
-    const [loading, setLoading] = useState(true);
-
-    // Simulate loading or fetch
-    useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1000); // Simulate a 1s load
-        return () => clearTimeout(timer);
-    }, []);
 
     return (
         <Dialog>
@@ -42,21 +34,11 @@ export const JobCard = ({
                             </div>
                         </div>
                         <div className="flex-between gap-4">
-                            {loading ? (
-                                <>
-                                    <Skeleton className="size-[24px] rounded-xl bg-gray-300" />
-                                    <Skeleton className="h-4 w-24 bg-dark-400" />
-                                </>
-                            ) : (
-                                <>
-                                    <img
-                                        src={`/api/logo?domain=${column.card_name}`}
-                                        className="size-[24px] rounded-xl"
-                                        alt={column.card_name}
-                                    />
-                                    <h4 className="font-light text-[#DFDFDF]">{column.card_name}</h4>
-                                </>
-                            )}
+                            <img
+                                src={`/api/logo?domain=${column.card_name}`}
+                                className="size-[24px] rounded-xl"
+                            />
+                            <h4 className="font-light text-[#DFDFDF]">{column.card_name}</h4>
                         </div>
                     </div>
                 </div>

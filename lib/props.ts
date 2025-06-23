@@ -11,15 +11,3 @@ export interface data{
     list_name:string,
     position:number
 }
-
-export type Contact = {
-    id: string;
-    board_id: string;
-    name: string;
-    email: string;
-    phone: string;
-    linkedin: string;
-    twitter: string;
-    company: string;
-    title: string;
-};
